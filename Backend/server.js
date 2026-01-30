@@ -1,13 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // MongoDB local connection
-mongoose.connect("mongodb://127.0.0.1:27017/employeeDB")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error("MongoDB connection error:", err));
 
@@ -29,7 +30,7 @@ const attendanceSchema = new mongoose.Schema({
     required: true,
   },
   date: {
-    type: String, // YYYY-MM-DD
+    type: String, 
     required: true,
   },
   status: {
@@ -135,10 +136,8 @@ app.get("/api/attendance", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-
-// Test route
 app.get("/", (req, res) => res.send("API is running"));
 
-// Start server
-app.listen(PORT, "localhost", () => console.log("Server running on port 5000"));
-
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
