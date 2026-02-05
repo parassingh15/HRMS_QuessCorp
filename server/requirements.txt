@@ -2,5 +2,9 @@ fastapi
 uvicorn
 pymongo
 motor
+pydantic
+email-validator
 python-dotenv
 dnspython
+
+
