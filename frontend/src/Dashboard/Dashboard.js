@@ -10,7 +10,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchEmployeeCount = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/employees/count");
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/employees/count`);
         const data = await res.json();
         setTotalEmployees(data.total);
       } catch (err) {
@@ -23,18 +23,20 @@ function Dashboard() {
 
   return (
     <div className="Dashboard">
-      <Navbar />
-      <div className="MainDashboard">
-        <div className="welcomeDiv">
-          <h1>Welcome Back, Admin</h1>
-          <Link to="/addEmployee" style={{ textDecoration: "none" }}>
-            <button className="newEmployeeBtn">
-              <i class="fa-solid fa-plus"></i> New Employee
-            </button>
-          </Link>
-        </div>
+  <Navbar />
 
-        <div className="EmployeesInfo">
+  <div className="MainDashboard">
+    <div className="welcomeDiv">
+      <h1>Welcome back, Admin</h1>
+
+      <Link to="/addEmployee" style={{ textDecoration: "none" }}>
+        <button className="newEmployeeBtn">
+          <i className="fa-solid fa-plus"></i> New Employee
+        </button>
+      </Link>
+    </div>
+
+    <div className="EmployeesInfo">
           <div class="card">
             <div class="card-header">
               <span class="title">Total Employees</span>
@@ -66,10 +68,11 @@ function Dashboard() {
           </div>
         </div>
 
-        <p className="allEmployeesTitle">All Employees</p>
-        <AllEmployees />
-      </div>
-    </div>
+    <p className="allEmployeesTitle">All Employees</p>
+    <AllEmployees />
+  </div>
+</div>
+
   );
 }
 

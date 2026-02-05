@@ -38,7 +38,7 @@ function AddEmployee() {
       };
 
       const response = await axios.post(
-        "http://localhost:5000/api/employees",
+        `${process.env.REACT_APP_BACKEND_URL}/api/employees`,
         payload
       );
 

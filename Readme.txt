@@ -1,11 +1,9 @@
-<<<<<<< HEAD
 Employee Attendance Management System
 
-A full-stack Employee Attendance Management System built using React, Node.js, Express, and MongoDB.
+A full-stack Employee Attendance Management System built using React (frontend) and Python FastAPI (backend) with MongoDB.
 Admins can manage employees and mark daily attendance as Present or Absent.
 
 FEATURES
-
 Employee Management
 
 Add new employees
@@ -22,13 +20,10 @@ Mark attendance (Present / Absent)
 
 Prevent duplicate attendance for the same date
 
-View attendance records per employee
-
 View attendance records for all employees (Admin view)
 
 TECH STACK
-
-Frontend
+Frontend:
 
 React
 
@@ -38,53 +33,33 @@ Fetch API
 
 CSS (Custom dashboard styling)
 
-Backend
+Backend:
 
-Node.js
+Python
 
-Express.js
+FastAPI
 
 MongoDB
 
-Mongoose
+Pydantic (for data validation)
+
+PyMongo (MongoDB driver)
 
 CORS
 
-PROJECT STRUCTURE
-
-employee-attendance
-│
-├── backend
-│ ├── models
-│ │ └── Attendance.js
-│ ├── index.js
-│ └── package.json
-│
-├── frontend
-│ ├── src
-│ │ ├── Attendance
-│ │ │ ├── Attendance.jsx
-│ │ │ ├── AttendanceList.jsx
-│ │ │ └── Attendance.css
-│ │ ├── Navbar
-│ │ ├── App.jsx
-│ │ └── index.js
-│ └── package.json
-│
-└── README.md
 
 API ENDPOINTS
-
 Employees
-GET /api/employees → Get all employees
-POST /api/employees → Add new employee
-DELETE /api/employees/:id → Delete employee
-GET /api/employees/count → Get total employee count
-
+Method	Endpoint	Description
+GET	/api/employees	Get all employees
+POST	/api/employees	Add new employee
+DELETE	/api/employees/{id}	Delete employee
+GET	/api/employees/count	Get total employee count
 Attendance
-POST /api/attendance → Mark attendance
-GET /api/attendance/:employeeId → Get attendance by employee
-GET /api/attendance → Get attendance for all employees
+Method	Endpoint	Description
+POST	/api/attendance	Mark attendance
+GET	/api/attendance/{employeeId}	Get attendance by employee
+GET	/api/attendance	Get attendance for all employees
 
 SAMPLE API REQUEST
 
@@ -92,34 +67,85 @@ Mark Attendance
 
 POST /api/attendance
 
-{
-"employeeId": "65b123abc456",
-"date": "2026-01-28",
-"status": "Present"
-}
-
 SETUP & INSTALLATION
-
 Clone Repository
 
-git clone https://github.com/your-username/employee-attendance.git
+Backend Setup (FastAPI)
 
-cd employee-attendance
+Install dependencies:
 
-Backend Setup
+cd server
+pip install -r requirements.txt
 
-cd backend
-npm install
-npm start
 
-MongoDB should be running locally at:
-mongodb://127.0.0.1:27017/employeeDB
+Create a .env file in backend/ (for local dev):
 
-Frontend Setup
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/mydatabase?retryWrites=true&w=majority
+PORT=5000  # Optional for local development
+
+
+Run locally:
+
+uvicorn main:app --reload --host 0.0.0.0 --port 5000
+
+
+Backend URL locally: http://localhost:5000
+
+Frontend Setup (React)
+
+Install dependencies:
 
 cd frontend
 npm install
+
+
+Create a .env file in the frontend root:
+
+REACT_APP_BACKEND_URL=http://localhost:5000
+
+
+Run locally:
+
 npm start
+
+
+Frontend URL locally: http://localhost:3000
+
+RENDER DEPLOYMENT
+1. Backend (FastAPI)
+
+Create a Python Web Service in Render.
+
+Set environment variables in Render dashboard:
+
+MONGO_URI → your MongoDB connection string
+
+Do NOT set PORT — Render provides it automatically
+
+Set the start command in Render:
+
+uvicorn main:app --host 0.0.0.0 --port $PORT
+
+2. Frontend (React)
+
+Create a Static Site in Render.
+
+Set environment variables in Render:
+
+REACT_APP_BACKEND_URL → your deployed backend URL, e.g. https://your-backend.onrender.com
+
+Build command:
+
+npm install
+npm run build
+
+
+Publish directory:
+
+build
+
+
+After deployment, React frontend will call the Render backend using REACT_APP_BACKEND_URL.
 
 APPLICATION SCREENS
 
@@ -133,15 +159,15 @@ Attendance History Table
 
 KEY LEARNINGS
 
-REST API design
+REST API design using FastAPI
 
-MongoDB relations using ObjectId
+MongoDB relations with ObjectId
 
 React state management
 
 Backend error handling
 
-Component-based architecture
+Component-based frontend architecture
 
 FUTURE ENHANCEMENTS
 
@@ -159,166 +185,4 @@ AUTHOR
 
 Paras Singh
 
-=======
-Employee Attendance Management System
-
-A full-stack Employee Attendance Management System built using React, Node.js, Express, and MongoDB.
-Admins can manage employees and mark daily attendance as Present or Absent.
-
-FEATURES
-
-Employee Management
-
-Add new employees
-
-View all employees
-
-Delete employees
-
-View total employee count
-
-Attendance Management
-
-Mark attendance (Present / Absent)
-
-Prevent duplicate attendance for the same date
-
-View attendance records per employee
-
-View attendance records for all employees (Admin view)
-
-TECH STACK
-
-Frontend
-
-React
-
-React Router
-
-Fetch API
-
-CSS (Custom dashboard styling)
-
-Backend
-
-Node.js
-
-Express.js
-
-MongoDB
-
-Mongoose
-
-CORS
-
-PROJECT STRUCTURE
-
-employee-attendance
-│
-├── backend
-│ ├── models
-│ │ └── Attendance.js
-│ ├── index.js
-│ └── package.json
-│
-├── frontend
-│ ├── src
-│ │ ├── Attendance
-│ │ │ ├── Attendance.jsx
-│ │ │ ├── AttendanceList.jsx
-│ │ │ └── Attendance.css
-│ │ ├── Navbar
-│ │ ├── App.jsx
-│ │ └── index.js
-│ └── package.json
-│
-└── README.md
-
-API ENDPOINTS
-
-Employees
-GET /api/employees → Get all employees
-POST /api/employees → Add new employee
-DELETE /api/employees/:id → Delete employee
-GET /api/employees/count → Get total employee count
-
-Attendance
-POST /api/attendance → Mark attendance
-GET /api/attendance/:employeeId → Get attendance by employee
-GET /api/attendance → Get attendance for all employees
-
-SAMPLE API REQUEST
-
-Mark Attendance
-
-POST /api/attendance
-
-{
-"employeeId": "65b123abc456",
-"date": "2026-01-28",
-"status": "Present"
-}
-
-SETUP & INSTALLATION
-
-Clone Repository
-
-git clone https://github.com/your-username/employee-attendance.git
-
-cd employee-attendance
-
-Backend Setup
-
-cd backend
-npm install
-npm start
-
-MongoDB should be running locally at:
-mongodb://127.0.0.1:27017/employeeDB
-
-Frontend Setup
-
-cd frontend
-npm install
-npm start
-
-APPLICATION SCREENS
-
-Admin Dashboard
-
-Employee List
-
-Attendance Marking Form
-
-Attendance History Table
-
-KEY LEARNINGS
-
-REST API design
-
-MongoDB relations using ObjectId
-
-React state management
-
-Backend error handling
-
-Component-based architecture
-
-FUTURE ENHANCEMENTS
-
-Monthly attendance reports
-
-Attendance percentage calculation
-
-Calendar-based attendance view
-
-Role-based authentication (Admin/User)
-
-Export attendance to Excel
-
-AUTHOR
-
-Paras Singh
-
->>>>>>> deee984cdaf50817dfd0bea5e40eafade3e9a9c5
 If you like this project, feel free to star the repository on GitHub ⭐

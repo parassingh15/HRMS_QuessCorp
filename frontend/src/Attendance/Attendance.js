@@ -1,6 +1,3 @@
-import React from "react";
-import AllEmployees from "../AllEmployees/AllEmployees";
-import { Link } from "react-router-dom";
 import './Attendance.css';
 import Navbar from "../Navbar/Navbar";
 import AttendanceList from "../AttendanceList/AttendanceList";
